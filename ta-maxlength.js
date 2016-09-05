@@ -6,7 +6,13 @@ angular
         return {
             restrict: 'A',
             link: function ($scope, element, attrs) {
-                var editor, maxLength = parseInt(attrs.taMaxlength);
+              var editor, editorID, editorContainer, maxLength = parseInt(attrs.taMaxlength);
+              var initDone = false;
+
+                if(isNaN(maxLength)) {
+                  console.warn('Invalid number for ta-maxlength, automatically set to POSITIVE_INFINITY');
+                  maxLength = Number.POSITIVE_INFINITY;
+                }
 
                 var getTruncatedContent = function(content) {
                     return $.truncate(content, {
@@ -37,6 +43,14 @@ angular
                     if((editorInstance !== undefined) && (editor === undefined)) {
                         editor = editorInstance;
 
+                        if(!initDone) {
+                            //create DIV
+                            editorID = editor.scope.displayElements.text[0].id.substr(13);
+                            editorContainer = angular.element(document.querySelector('#taTextElement'+editorID));
+                            editorContainer.parent().append('<div id="taInnerCharCount'+editorID+'" class="taInnerCharCount"></div>');
+                            initDone = true;
+                        }
+
                         getEditor().addEventListener('keydown', function(e) {
                             if(!isNavigationKey(e.keyCode) && !isCopying(e) && (getContentLength() >= maxLength)) {
                                 e.preventDefault();
@@ -52,6 +66,10 @@ angular
                             editor.scope.html = getTruncatedContent(modifiedContent);
                         });
                     }
+
+                    var charCountDiv = angular.element(document.querySelector('#taInnerCharCount'+editorID));
+                    var remainingChars = maxLength - getContentLength();
+                    charCountDiv.html(remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT'));
                 });
             }
         };
