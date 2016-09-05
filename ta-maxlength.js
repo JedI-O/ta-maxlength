@@ -2,7 +2,7 @@
 
 angular
     .module('ta-maxlength', [])
-    .directive('taMaxlength', function ($timeout, textAngularManager) {
+    .directive('taMaxlength', function ($timeout, textAngularManager, $translate) {
         return {
             restrict: 'A',
             link: function ($scope, element, attrs) {
