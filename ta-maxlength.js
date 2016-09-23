@@ -69,7 +69,17 @@ angular
 
                     var charCountDiv = angular.element(document.querySelector('#taInnerCharCount'+editorID));
                     var remainingChars = maxLength - getContentLength();
-                    charCountDiv.html(remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT'));
+                    if(remainingChars < 0) {
+                      //possible if some text was copied and pasted
+                      editor.scope.html = editor.scope.html.substr(0, maxLength);
+                      remainingChars = 0;
+                    }
+
+                    if(remainingChars == 0) {
+                      charCountDiv.html('<span style="color: darkred;">remainingChars' + ' ' + $translate.instant('CHARACTERS_LEFT') + '</span>');
+                    } else {
+                      charCountDiv.html(remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT'));
+                    }
                 });
             }
         };
