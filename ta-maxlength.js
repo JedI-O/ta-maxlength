@@ -71,12 +71,12 @@ angular
                     var remainingChars = maxLength - getContentLength();
                     if(remainingChars < 0) {
                       //possible if some text was copied and pasted
-                      editor.scope.html = editor.scope.html.substr(0, maxLength);
+                      editor.scope.html = editor.scope.html.substr(0, maxLength+3);
                       remainingChars = 0;
                     }
 
                     if(remainingChars == 0) {
-                      charCountDiv.html('<span style="color: darkred;">remainingChars' + ' ' + $translate.instant('CHARACTERS_LEFT') + '</span>');
+                      charCountDiv.html('<span style="color: darkred;">' + remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT') + '</span>');
                     } else {
                       charCountDiv.html(remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT'));
                     }
