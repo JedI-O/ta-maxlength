@@ -15,10 +15,7 @@ angular
                 }
 
                 var getTruncatedContent = function(content) {
-                    return $.truncate(content, {
-                        length: maxLength + 1,
-                        ellipsis: ''
-                    });
+                    return content.substr(0, maxLength);
                 };
 
                 var getEditor = function() {
