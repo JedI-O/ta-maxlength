@@ -19,20 +19,11 @@ angular
                 };
 
                 var getEditor = function() {
-                    if(!editor) {
-                      return null;
-                    } else {
-                      return editor.scope.displayElements.text[0];
-                    }
-
+                    return editor.scope.displayElements.text[0];
                 };
 
                 var getContentLength = function() {
-                    if(!editor) {
-                      return 0;
-                    } else {
-                      return angular.element(getEditor()).text().length;
-                    }
+                    return angular.element(getEditor()).text().length;
                 };
 
                 var isNavigationKey = function(keyCode) {
