@@ -101,6 +101,7 @@ angular
         };
 
         var getContentLength = function() {
+          console.info('content length:', angular.element(getEditor()).text().length);
           return angular.element(getEditor()).text().length;
         };
 
