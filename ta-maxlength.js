@@ -14,7 +14,7 @@ angular
           maxLength = Number.POSITIVE_INFINITY;
         }
 
-        var stripContent = function() {
+        var stripContent = function(content) {
           //build dom stack
           var domStack = [];
 
@@ -23,9 +23,9 @@ angular
           var printedChars = 0;
           var parseMode = 'text';
           var tagName = '';
-          for(var i=0; i<editor.scope.html.length; i++) {
-            var currentChar = editor.scope.html[i];
-            var nextChar = (i<editor.scope.html.length-1) ? editor.scope.html.length[i+1] : '';
+          for(var i=0; i<content.length; i++) {
+            var currentChar = content[i];
+            var nextChar = (i<content.length-1) ? content.length[i+1] : '';
             strippedText += currentChar;
 
             if(currentChar == '<') {
@@ -141,11 +141,9 @@ angular
 
           return editorInstance === undefined ? '' : editor.scope.html;
         }, function() {
-          var editorInstance = textAngularManager.retrieveEditor(attrs.name);
-
           if(getContentLength() > maxLength) {
             $timeout(function() {
-              editorInstance.scope.html = stripContent();
+              editor.scope.html = stripContent(editor.scope.html);
             });
           }
 
