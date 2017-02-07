@@ -79,6 +79,7 @@ angular
                     var remainingChars = maxLength - getContentLength();
                     if(remainingChars < 0) {
                       //possible if some text was copied and pasted
+                      console.info('text had to be stripped');
                       editor.scope.html = editor.scope.html.substr(0, maxLength+3);
                       remainingChars = 0;
                     }
