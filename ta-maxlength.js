@@ -56,7 +56,12 @@ angular
                         });
 
                         getEditor().addEventListener('click', function(e) {
-                          console.info('[ta-maxlength] textAngular element was clicked');
+                          var remainingChars = maxLength - getContentLength();
+                          if(remainingChars == 0) {
+                            charCountDiv.html('<span style="color: darkred;">' + remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT') + '</span>');
+                          } else {
+                            charCountDiv.html(remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT'));
+                          }
                         });
                     }
 
