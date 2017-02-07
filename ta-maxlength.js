@@ -14,7 +14,7 @@ angular
           maxLength = Number.POSITIVE_INFINITY;
         }
 
-        var stripContent = function(content) {
+        var parseContent = function(content, returnValue) {
           //build dom stack
           var domStack = [];
 
@@ -74,14 +74,23 @@ angular
               }
             }
           }
-          console.log('stripped text:', strippedText);
+          //console.log('stripped text:', strippedText);
 
-          return strippedText;
+          switch(returnValue) {
+            case 'strippedText':
+              return strippedText;
+            case 'charCount':
+              return printedChars;
+          }
+        };
+
+        var stripContent = function(content) {
+          return parseContent(content, 'strippedText');
         };
 
         var updateRemainingChars = function() {
           var charCountDiv = angular.element(document.querySelector('#taInnerCharCount'+editorID));
-          var remainingChars = maxLength - getContentLength();
+          var remainingChars = maxLength - getContentLength(editor.scope.html);
 
           //possible if some text was copied and pasted
           if(remainingChars < 0) {
@@ -100,9 +109,8 @@ angular
           return editor.scope.displayElements.text[0];
         };
 
-        var getContentLength = function() {
-          console.info('content:', angular.element(getEditor()).text());
-          return angular.element(getEditor()).text().length;
+        var getContentLength = function(content) {
+          return parseContent(content, 'charCount');
         };
 
         var isNavigationKey = function(keyCode) {
@@ -129,7 +137,7 @@ angular
             }
 
             getEditor().addEventListener('keydown', function(e) {
-              if(!isNavigationKey(e.keyCode) && !isCopying(e) && (getContentLength() >= maxLength)) {
+              if(!isNavigationKey(e.keyCode) && !isCopying(e) && (getContentLength(editor.scope.html) >= maxLength)) {
                 e.preventDefault();
                 return false;
               }
@@ -142,7 +150,7 @@ angular
 
           return editorInstance === undefined ? '' : editor.scope.html;
         }, function() {
-          if(getContentLength() > maxLength) {
+          if(getContentLength(editor.scope.html) > maxLength) {
             editor.scope.html = stripContent(editor.scope.html);
           }
           updateRemainingChars();
