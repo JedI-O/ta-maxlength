@@ -145,9 +145,9 @@ angular
           if(getContentLength() > maxLength) {
             $timeout(function() {
               editor.scope.html = stripContent(editor.scope.html);
-              updateRemainingChars();
             });
           }
+          updateRemainingChars();
         });
       }
     };
