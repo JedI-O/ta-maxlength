@@ -110,6 +110,7 @@ angular
         };
 
         var getContentLength = function(content) {
+          console.log('length of', content, parseContent(content, 'charCount'));
           return parseContent(content, 'charCount');
         };
 
