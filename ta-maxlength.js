@@ -18,6 +18,9 @@ angular
           //remove zero-width no break spaces
           content = content.replace(new RegExp('&#65279;', 'g'), '');
 
+          //try something
+          content = content.replace(new RegExp('&lt;', 'g'), '<');
+
           //build dom stack
           var domStack = [];
 
