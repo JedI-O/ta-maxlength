@@ -141,6 +141,8 @@ angular
 
           return editorInstance === undefined ? '' : editor.scope.html;
         }, function() {
+          console.info('getEditor:', getEditor());
+
           if(getContentLength() > maxLength) {
             $timeout(function() {
               editor.scope.html = stripContent();
