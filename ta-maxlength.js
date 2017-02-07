@@ -124,15 +124,15 @@ angular
               editorContainer = angular.element(document.querySelector('#taTextElement'+editorID));
               editorContainer.parent().append('<div id="taInnerCharCount'+editorID+'" class="taInnerCharCount"></div>');
               initDone = true;
+              updateRemainingChars();
             }
 
             getEditor().addEventListener('keydown', function(e) {
-              updateRemainingChars();
-
               if(!isNavigationKey(e.keyCode) && !isCopying(e) && (getContentLength() >= maxLength)) {
                 e.preventDefault();
                 return false;
               }
+              updateRemainingChars();
             });
 
             getEditor().addEventListener('click', function() {
