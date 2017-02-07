@@ -53,6 +53,13 @@ angular
                       strippedText += '</' + tag + '>';
                     });
                     domStack = [];
+
+                    switch(returnValue) {
+                      case 'strippedText':
+                        return strippedText;
+                      case 'charCount':
+                        return printedChars;
+                    }
                   }
                 }
               } else if(parseMode == 'htmlSpecialChar') {
@@ -90,7 +97,7 @@ angular
 
           switch(returnValue) {
             case 'strippedText':
-              console.log('stripped text:', strippedText, strippedText.length);
+              //console.log('stripped text:', strippedText, strippedText.length);
               return strippedText;
             case 'charCount':
               return printedChars;
@@ -123,7 +130,6 @@ angular
         };
 
         var getContentLength = function(content) {
-          console.log('length of', content, parseContent(content, 'charCount'));
           return parseContent(content, 'charCount');
         };
 
