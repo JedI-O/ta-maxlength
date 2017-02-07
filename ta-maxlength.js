@@ -54,7 +54,7 @@ angular
                     });
                     domStack = [];
 
-                    console.info('stripped text: '+strippedText+' with length '+printedChars);
+                    console.info('returnValue:', returnValue);
                     switch(returnValue) {
                       case 'strippedText':
                         console.log('right place. stripped content has now '+printedChars+' chars.');
