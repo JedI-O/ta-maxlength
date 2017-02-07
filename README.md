@@ -1,6 +1,6 @@
 # ta-maxlength
 
-Define maxlength for [textAngular](https://github.com/fraywing/textAngular)
+Define a maximum length for [textAngular](https://github.com/fraywing/textAngular) elements.
 
 ##Install
 
