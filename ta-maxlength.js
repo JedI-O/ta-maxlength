@@ -15,6 +15,9 @@ angular
         }
 
         var parseContent = function(content, returnValue) {
+          //remove zero-width no break spaces
+          content = content.replace(new RegExp('&#65279;', 'g'), '');
+
           //build dom stack
           var domStack = [];
 
