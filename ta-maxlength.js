@@ -54,6 +54,10 @@ angular
                                 return false;
                             }
                         });
+
+                        getEditor().addEventListener('click', function(e) {
+                          console.info('[ta-maxlength] textAngular element was clicked');
+                        });
                     }
 
                     return editorInstance === undefined ? '' : editor.scope.html;
