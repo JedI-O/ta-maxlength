@@ -92,10 +92,6 @@ angular
           if(remainingChars == 0) {
             charCountDiv.html('<span style="color: darkred;">' + remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT') + '</span>');
           } else {
-            //TODO for some reason, watcher update is fired two times and misapplies 1 char
-            if(remainingChars < maxLength) {
-              remainingChars++;
-            }
             charCountDiv.html(remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT'));
           }
         };
@@ -143,7 +139,6 @@ angular
             });
           }
 
-          console.log('returning watcher value', editorInstance === undefined ? '' : editor.scope.html);
           return editorInstance === undefined ? '' : editor.scope.html;
         }, function() {
           if(getContentLength() > maxLength) {
