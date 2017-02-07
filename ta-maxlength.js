@@ -45,6 +45,7 @@ angular
                   parseMode = 'htmlSpecialChar';
                 } else {
                   printedChars++;
+                  console.log('current number of chars:', printedChars);
 
                   if(printedChars == maxLength) {
                     //close remaining tags and stop
