@@ -47,16 +47,14 @@ angular
                   printedChars++;
 
                   if(printedChars == maxLength) {
-                    console.log('check 1');
                     //close remaining tags and stop
                     domStack = domStack.reverse();
                     domStack.forEach(function (tag) {
                       strippedText += '</' + tag + '>';
                     });
-                    console.log('check 2');
                     domStack = [];
-                    console.log('check 3');
 
+                    console.info('stripped text: '+strippedText+' with length '+printedChars);
                     switch(returnValue) {
                       case 'strippedText':
                         console.log('right place. stripped content has now '+printedChars+' chars.');
@@ -64,7 +62,6 @@ angular
                       case 'charCount':
                         return printedChars;
                     }
-                    console.log('check 4 (should never be reached)');
                   }
                 }
               } else if(parseMode == 'htmlSpecialChar') {
