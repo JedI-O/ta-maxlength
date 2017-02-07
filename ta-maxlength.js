@@ -171,10 +171,7 @@ angular
 
           return editorInstance === undefined ? '' : editor.scope.html;
         }, function() {
-          if(getContentLength(editor.scope.html) > maxLength) {
-            console.info('need to strip content ('+getContentLength(editor.scope.html)+' chars)');
-            editor.scope.html = stripContent(editor.scope.html);
-          }
+          editor.scope.html = stripContent(editor.scope.html);
           updateRemainingChars();
         });
       }
