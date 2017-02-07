@@ -85,12 +85,63 @@ angular
             var domStack = [];
 
             //parse html text
+            var strippedText = '';
+            var printedChars = 0;
+            var parseMode = 'text';
+            var tagName = '';
             for(var i=0; i<editor.scope.html.length; i++) {
-              console.log(editor.scope.html[i]);
+              var currentChar = editor.scope.html.length[i];
+              var nextChar = (i<editor.scope.html.length-1) ? editor.scope.html.length[i+1] : '';
+              strippedText += currentChar;
+
+              if(currentChar == '<') {
+                if(nextChar == '/') {
+                  domStack.pop();
+                  parseMode = 'ignoreHTML';
+                } else {
+                  parseMode = 'findTagName';
+                }
+              } else {
+                if(parseMode == 'text') {
+                  printedChars++;
+
+                  if(printedChars == maxLength) {
+                    //close remaining tags and stop
+                    domStack = domStack.reverse();
+                    domStack.forEach(function(tag) {
+                      strippedText += '</' + tag + '>';
+                    });
+                    domStack = [];
+                    break;
+                  }
+                } else if(parseMode == 'findTagName') {
+                  if(currentChar == '>') {
+                    //tag closes
+                    domStack.push(tagName);
+                    tagName = '';
+                    parseMode = 'text';
+                  } else if(currentChar == ' ') {
+                    //attributes after tag name
+                    domStack.push(tagName);
+                    tagName = '';
+                    parseMode = 'ignoreHTML';
+                  } else if(currentChar == '/') {
+                    //self closing tags
+                    tagName = '';
+                    parseMode = 'ignoreHTML';
+                  } else {
+                    //letters of tag name
+                    tagName += currentChar;
+                  }
+                } else if(parseMode == 'ignoreHTML') {
+                  if(currentChar == '>') {
+                    parseMode = 'text';
+                  }
+                }
+              }
             }
 
-            console.info('text too long:', editor.scope.html, editor.scope.html.length);
-            editor.scope.html = editor.scope.html.substr(0, maxLength+3);
+            editor.scope.html = strippedText;
             remainingChars = 0;
           }
 
