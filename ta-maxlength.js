@@ -26,6 +26,7 @@ angular
           var printedChars = 0;
           var parseMode = 'text';
           var tagName = '';
+
           for(var i=0; i<content.length; i++) {
             var currentChar = content[i];
             var nextChar = (i<content.length-1) ? content.length[i+1] : '';
@@ -40,19 +41,18 @@ angular
               }
             } else {
               if(parseMode == 'text') {
-                if (currentChar == '&') {
+                if(currentChar == '&') {
                   parseMode = 'htmlSpecialChar';
                 } else {
                   printedChars++;
 
-                  if (printedChars == maxLength) {
+                  if(printedChars == maxLength) {
                     //close remaining tags and stop
                     domStack = domStack.reverse();
                     domStack.forEach(function (tag) {
                       strippedText += '</' + tag + '>';
                     });
                     domStack = [];
-                    break;
                   }
                 }
               } else if(parseMode == 'htmlSpecialChar') {
@@ -87,10 +87,10 @@ angular
               }
             }
           }
-          //console.log('stripped text:', strippedText);
 
           switch(returnValue) {
             case 'strippedText':
+              console.log('stripped text:', strippedText, strippedText.length);
               return strippedText;
             case 'charCount':
               return printedChars;
