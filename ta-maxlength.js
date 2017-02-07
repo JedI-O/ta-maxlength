@@ -15,6 +15,8 @@ angular
         }
 
         var stripContent = function(content) {
+          console.log('html content after stripping call:', content);
+
           //build dom stack
           var domStack = [];
 
@@ -143,6 +145,7 @@ angular
         }, function() {
           if(getContentLength() > maxLength) {
             $timeout(function() {
+              console.log('html before stripping call:', editor.scope.html);
               editor.scope.html = stripContent(editor.scope.html);
             });
           }
