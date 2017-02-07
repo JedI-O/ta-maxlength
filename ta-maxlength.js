@@ -132,7 +132,6 @@ angular
                 e.preventDefault();
                 return false;
               }
-              updateRemainingChars();
             });
 
             getEditor().addEventListener('click', function() {
