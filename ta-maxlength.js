@@ -56,7 +56,6 @@ angular
 
                     switch(returnValue) {
                       case 'strippedText':
-                        console.log('right place. stripped content has now '+printedChars+' chars.');
                         return strippedText;
                       case 'charCount':
                         return printedChars;
@@ -121,6 +120,8 @@ angular
 
           if(remainingChars == 0) {
             charCountDiv.html('<span style="color: darkred;">' + remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT') + '</span>');
+          } else if(remainingChars <= 15) {
+            charCountDiv.html('<span style="color: sienna;">' + remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT') + '</span>');
           } else {
             charCountDiv.html(remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT'));
           }
