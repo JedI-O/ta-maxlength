@@ -18,9 +18,6 @@ angular
           //remove zero-width no break spaces
           content = content.replace(new RegExp('&#65279;', 'g'), '');
 
-          //try something
-          content = content.replace(new RegExp('&lt;', 'g'), '<');
-
           //build dom stack
           var domStack = [];
 
@@ -43,17 +40,27 @@ angular
               }
             } else {
               if(parseMode == 'text') {
-                printedChars++;
+                if (currentChar == '&') {
+                  parseMode = 'htmlSpecialChar';
+                } else {
+                  printedChars++;
 
-                if(printedChars == maxLength) {
-                  //close remaining tags and stop
-                  domStack = domStack.reverse();
-                  domStack.forEach(function(tag) {
-                    strippedText += '</' + tag + '>';
-                  });
-                  domStack = [];
-                  break;
+                  if (printedChars == maxLength) {
+                    //close remaining tags and stop
+                    domStack = domStack.reverse();
+                    domStack.forEach(function (tag) {
+                      strippedText += '</' + tag + '>';
+                    });
+                    domStack = [];
+                    break;
+                  }
                 }
+              } else if(parseMode == 'htmlSpecialChar') {
+                if(currentChar == ';') {
+                  printedChars++;
+                  parseMode = 'text';
+                }
+                //if no semicolon, HTML special char is still parsed; do nothing
               } else if(parseMode == 'findTagName') {
                 if(currentChar == '>') {
                   //tag closes
