@@ -143,6 +143,7 @@ angular
             });
           }
 
+          console.log('returning watcher value', editorInstance === undefined ? '' : editor.scope.html);
           return editorInstance === undefined ? '' : editor.scope.html;
         }, function() {
           if(getContentLength() > maxLength) {
