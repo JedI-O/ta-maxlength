@@ -45,15 +45,17 @@ angular
                   parseMode = 'htmlSpecialChar';
                 } else {
                   printedChars++;
-                  console.log('current number of chars:', printedChars);
 
                   if(printedChars == maxLength) {
+                    console.log('check 1');
                     //close remaining tags and stop
                     domStack = domStack.reverse();
                     domStack.forEach(function (tag) {
                       strippedText += '</' + tag + '>';
                     });
+                    console.log('check 2');
                     domStack = [];
+                    console.log('check 3');
 
                     switch(returnValue) {
                       case 'strippedText':
@@ -62,6 +64,7 @@ angular
                       case 'charCount':
                         return printedChars;
                     }
+                    console.log('check 4 (should never be reached)');
                   }
                 }
               } else if(parseMode == 'htmlSpecialChar') {
