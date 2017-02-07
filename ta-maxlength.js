@@ -54,7 +54,6 @@ angular
                     });
                     domStack = [];
 
-                    console.info('returnValue:', returnValue);
                     switch(returnValue) {
                       case 'strippedText':
                         console.log('right place. stripped content has now '+printedChars+' chars.');
@@ -173,6 +172,7 @@ angular
           return editorInstance === undefined ? '' : editor.scope.html;
         }, function() {
           if(getContentLength(editor.scope.html) > maxLength) {
+            console.info('need to strip content ('+getContentLength(editor.scope.html)+' chars)');
             editor.scope.html = stripContent(editor.scope.html);
           }
           updateRemainingChars();
