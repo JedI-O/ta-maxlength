@@ -124,6 +124,7 @@ angular
               editorContainer = angular.element(document.querySelector('#taTextElement'+editorID));
               editorContainer.parent().append('<div id="taInnerCharCount'+editorID+'" class="taInnerCharCount"></div>');
               initDone = true;
+              console.log('call updateRemainingChars from !initDone');
               updateRemainingChars();
             }
 
@@ -135,6 +136,7 @@ angular
             });
 
             getEditor().addEventListener('click', function() {
+              console.log('call updateRemainingChars from click');
               updateRemainingChars();
             });
           }
@@ -146,6 +148,7 @@ angular
               editor.scope.html = stripContent(editor.scope.html);
             });
           }
+          console.log('call updateRemainingChars from watcher');
           updateRemainingChars();
         });
       }
