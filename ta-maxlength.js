@@ -141,11 +141,11 @@ angular
 
           return editorInstance === undefined ? '' : editor.scope.html;
         }, function() {
-          console.info('textAngularManager.retrieveEditor(attrs.name):', textAngularManager.retrieveEditor(attrs.name));
+          var editorInstance = textAngularManager.retrieveEditor(attrs.name);
 
           if(getContentLength() > maxLength) {
             $timeout(function() {
-              editor.scope.html = stripContent();
+              editorInstance.scope.html = stripContent();
             });
           }
 
