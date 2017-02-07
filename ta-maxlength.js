@@ -23,7 +23,6 @@ angular
         };
 
         var getContentLength = function() {
-          console.log('editor:', angular.element(getEditor()));
           return angular.element(getEditor()).text().length;
         };
 
@@ -72,14 +71,24 @@ angular
         }, function(modifiedContent) {
           if(getContentLength() > maxLength) {
             $timeout(function() {
+              console.log('getting truncated content:', getTruncatedContent(modifiedContent));
               editor.scope.html = getTruncatedContent(modifiedContent);
             });
           }
 
           var charCountDiv = angular.element(document.querySelector('#taInnerCharCount'+editorID));
           var remainingChars = maxLength - getContentLength();
+
+          //possible if some text was copied and pasted
           if(remainingChars < 0) {
-            //possible if some text was copied and pasted
+            //build dom stack
+            var domStack = [];
+
+            //parse html text
+            for(var i=0; i<editor.scope.html.length; i++) {
+              console.log(editor.scope.html[i]);
+            }
+
             console.info('text too long:', editor.scope.html, editor.scope.html.length);
             editor.scope.html = editor.scope.html.substr(0, maxLength+3);
             remainingChars = 0;
