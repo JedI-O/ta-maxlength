@@ -56,6 +56,7 @@ angular
 
                     switch(returnValue) {
                       case 'strippedText':
+                        console.log('right place. stripped content has now '+printedChars+' chars.');
                         return strippedText;
                       case 'charCount':
                         return printedChars;
