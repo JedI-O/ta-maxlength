@@ -141,7 +141,9 @@ angular
               }
             }
 
-            editor.scope.html = strippedText;
+            console.log('stripped text:', strippedText);
+
+            editor.scope.html = '<b>Pfannkuchen</b>'; //strippedText;
             remainingChars = 0;
           }
 
