@@ -90,7 +90,7 @@ angular
             var parseMode = 'text';
             var tagName = '';
             for(var i=0; i<editor.scope.html.length; i++) {
-              var currentChar = editor.scope.html.length[i];
+              var currentChar = editor.scope.html[i];
               var nextChar = (i<editor.scope.html.length-1) ? editor.scope.html.length[i+1] : '';
               strippedText += currentChar;
 
