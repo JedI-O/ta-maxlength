@@ -57,6 +57,8 @@ angular
 
                         getEditor().addEventListener('click', function(e) {
                           var remainingChars = maxLength - getContentLength();
+                          var charCountDiv = angular.element(document.querySelector('#taInnerCharCount'+editorID));
+
                           if(remainingChars == 0) {
                             charCountDiv.html('<span style="color: darkred;">' + remainingChars + ' ' + $translate.instant('CHARACTERS_LEFT') + '</span>');
                           } else {
