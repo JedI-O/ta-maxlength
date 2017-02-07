@@ -141,7 +141,7 @@ angular
 
           return editorInstance === undefined ? '' : editor.scope.html;
         }, function() {
-          console.info('getEditor:', getEditor());
+          console.info('textAngularManager.retrieveEditor(attrs.name):', textAngularManager.retrieveEditor(attrs.name));
 
           if(getContentLength() > maxLength) {
             $timeout(function() {
