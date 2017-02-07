@@ -147,7 +147,7 @@ angular
             });
           }
 
-          updateRemainingChars();
+          //updateRemainingChars();
         });
       }
     };
