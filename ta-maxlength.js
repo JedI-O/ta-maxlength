@@ -162,7 +162,9 @@ angular
             getEditor().addEventListener('keydown', function(e) {
               if(!isNavigationKey(e.keyCode) && !isCopying(e) && (getContentLength(editor.scope.html) >= maxLength)) {
                 e.preventDefault();
-                return false;
+
+                return true;
+                //return false;
               }
             });
 
