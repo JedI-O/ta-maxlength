@@ -59,9 +59,11 @@ angular
                         //add the rangy span
                         var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
                         var rangySpan = content.match(rangySpanRegex);
-                        console.info('rangySpan:', rangySpan);
 
-                        strippedText += '';
+                        if(rangySpan != null && rangySpan.length>0) {
+                          strippedText += rangySpan[0];
+                        }
+
                         return strippedText;
                       case 'charCount':
                         return printedChars;
