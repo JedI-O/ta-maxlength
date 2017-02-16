@@ -114,6 +114,7 @@ angular
 
           //possible if some text was copied and pasted
           if(remainingChars < 0) {
+            console.info('remaining chars negative:', remainingChars);
             editor.scope.html = stripContent(editor.scope.html);
             remainingChars = 0;
           }
