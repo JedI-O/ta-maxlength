@@ -97,7 +97,7 @@ angular
 
           switch(returnValue) {
             case 'strippedText':
-              //console.log('stripped text:', strippedText, strippedText.length);
+              console.log('stripped text:', strippedText, strippedText.length);
               return strippedText;
             case 'charCount':
               return printedChars;
@@ -113,7 +113,7 @@ angular
           var remainingChars = maxLength - getContentLength(editor.scope.html);
           console.info('remaining chars:', remainingChars);
 
-          //possible if some text was copied and pasted
+          //should actually never occur, but just in case...
           if(remainingChars < 0) {
             editor.scope.html = stripContent(editor.scope.html);
             remainingChars = 0;
