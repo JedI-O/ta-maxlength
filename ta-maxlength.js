@@ -15,12 +15,20 @@ angular
         }
 
         var parseContent = function(content, returnValue) {
+          //rangy span
+          var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
+          var rangySpanWithParagraphRegex = /<p><span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span><\/p>/;
+          var rangySpan = content.match(rangySpanRegex);
+          var rangySpanWithParagraph = content.match(rangySpanWithParagraphRegex);
+
           //remove zero-width no break spaces
           content = content.replace(new RegExp('&#65279;', 'g'), '');
 
           //remove empty paragraphs if existing at the beginning
           if(content.indexOf('<p></p>') == 0) {
             content = content.substr(7);
+          } else if(rangySpanWithParagraph != null && rangySpanWithParagraph.index == 0) {
+            content = content.replace(rangySpanWithParagraph[0], '');
           }
 
           //build dom stack
@@ -57,9 +65,6 @@ angular
                     for(var domStackIndex=0; domStackIndex<domStack.length; domStackIndex++) {
                       if(domStackIndex==domStack.length-1) {
                         //add the rangy span
-                        var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
-                        var rangySpan = content.match(rangySpanRegex);
-
                         if(rangySpan != null && rangySpan.length>0) {
                           strippedText += rangySpan[0];
                         }
