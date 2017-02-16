@@ -56,7 +56,12 @@ angular
 
                     switch(returnValue) {
                       case 'strippedText':
-                        console.info('stripped text:', strippedText, strippedText.length);
+                        //add the rangy span
+                        var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
+                        var rangySpan = content.match(rangySpanRegex);
+                        console.info('rangySpan:', rangySpan);
+
+                        strippedText += '';
                         return strippedText;
                       case 'charCount':
                         return printedChars;
@@ -98,7 +103,6 @@ angular
 
           switch(returnValue) {
             case 'strippedText':
-              console.info('strippedText with span:', strippedText);
               return strippedText;
             case 'charCount':
               return printedChars;
