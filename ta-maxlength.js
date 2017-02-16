@@ -156,15 +156,15 @@ angular
               editorContainer = angular.element(document.querySelector('#taTextElement'+editorID));
               editorContainer.parent().append('<div id="taInnerCharCount'+editorID+'" class="taInnerCharCount"></div>');
               initDone = true;
+              console.info('init done now, updating remaining chars once');
               updateRemainingChars();
             }
 
             getEditor().addEventListener('keydown', function(e) {
               if(!isNavigationKey(e.keyCode) && !isCopying(e) && (getContentLength(editor.scope.html) >= maxLength)) {
-                //e.preventDefault();
-
-                return true;
-                //return false;
+                console.info('preventing default and returning false');
+                e.preventDefault();
+                return false;
               }
             });
 
@@ -175,6 +175,7 @@ angular
 
           return editorInstance === undefined ? '' : editor.scope.html;
         }, function() {
+          console.info('about to strip content');
           editor.scope.html = stripContent(editor.scope.html);
           updateRemainingChars();
         });
