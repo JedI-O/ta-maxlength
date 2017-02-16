@@ -77,7 +77,7 @@ angular
 
                     switch(returnValue) {
                       case 'strippedText':
-                        console.info('strippedText:', strippedText);
+                        //console.info('strippedText:', strippedText);
                         return strippedText;
                       case 'charCount':
                         return printedChars;
@@ -119,7 +119,7 @@ angular
 
           switch(returnValue) {
             case 'strippedText':
-              console.info('full text:', strippedText);
+              //console.info('full text:', strippedText);
               return strippedText;
             case 'charCount':
               return printedChars;
