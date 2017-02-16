@@ -111,10 +111,10 @@ angular
         var updateRemainingChars = function() {
           var charCountDiv = angular.element(document.querySelector('#taInnerCharCount'+editorID));
           var remainingChars = maxLength - getContentLength(editor.scope.html);
+          console.info('remaining chars:', remainingChars);
 
           //possible if some text was copied and pasted
           if(remainingChars < 0) {
-            console.info('remaining chars negative:', remainingChars);
             editor.scope.html = stripContent(editor.scope.html);
             remainingChars = 0;
           }
