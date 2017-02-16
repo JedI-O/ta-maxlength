@@ -161,7 +161,7 @@ angular
 
             getEditor().addEventListener('keydown', function(e) {
               if(!isNavigationKey(e.keyCode) && !isCopying(e) && (getContentLength(editor.scope.html) >= maxLength)) {
-                e.preventDefault();
+                //e.preventDefault();
 
                 return true;
                 //return false;
