@@ -18,6 +18,11 @@ angular
           //remove zero-width no break spaces
           content = content.replace(new RegExp('&#65279;', 'g'), '');
 
+          //remove empty paragraphs if existing at the beginning
+          if(content.indexOf('<p></p>') == 0) {
+            content = content.substr(7);
+          }
+
           //build dom stack
           var domStack = [];
 
