@@ -49,13 +49,8 @@ angular
                   if(printedChars == maxLength) {
                     //close remaining tags and stop
                     domStack = domStack.reverse();
-                    domStack.forEach(function (tag) {
-                      strippedText += '</' + tag + '>';
-                    });
-                    domStack = [];
-
-                    switch(returnValue) {
-                      case 'strippedText':
+                    for(var domStackIndex=0; domStackIndex<domStack.length; domStackIndex++) {
+                      if(domStackIndex==domStack.length-1) {
                         //add the rangy span
                         var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
                         var rangySpan = content.match(rangySpanRegex);
@@ -63,7 +58,15 @@ angular
                         if(rangySpan != null && rangySpan.length>0) {
                           strippedText += rangySpan[0];
                         }
+                      }
 
+                      var tag = domStack[domStackIndex];
+                      strippedText += '</' + tag + '>';
+                    }
+                    domStack = [];
+
+                    switch(returnValue) {
+                      case 'strippedText':
                         return strippedText;
                       case 'charCount':
                         return printedChars;
