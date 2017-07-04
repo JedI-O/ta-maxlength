@@ -122,6 +122,7 @@ angular
               //console.info('full text:', strippedText);
               return strippedText;
             case 'charCount':
+              console.info('stripped text:', printedChars);
               return printedChars;
           }
         };
