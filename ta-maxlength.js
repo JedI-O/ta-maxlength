@@ -61,6 +61,7 @@ angular
 
                     //add the rangy span
                     if(rangySpan != null && rangySpan.length>0) {
+                      console.info('add rangy span:', rangySpan[0]);
                       strippedText += rangySpan[0];
                     }
 
