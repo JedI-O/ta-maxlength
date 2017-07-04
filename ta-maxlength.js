@@ -27,9 +27,9 @@ angular
           //remove empty paragraphs if existing at the beginning
           if(content.indexOf('<p></p>') == 0) {
             content = content.substr(7);
-          } else if(rangySpanWithParagraph != null && rangySpanWithParagraph.index == 0) {
+          }/* else if(rangySpanWithParagraph != null && rangySpanWithParagraph.index == 0) {
             content = content.replace(rangySpanWithParagraph[0], '');
-          }
+          }*/
 
           //build dom stack
           var domStack = [];
