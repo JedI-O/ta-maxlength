@@ -17,6 +17,10 @@ angular
         var parseContent = function(content, returnValue) {
           console.info('CONTENT:', content);
 
+          var tmp = document.createElement("DIV");
+          tmp.innerHTML = html;
+          console.info('LENGTH:', tmp.textContent || tmp.innerText || "");
+
           //rangy span
           var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
           var rangySpan = content.match(rangySpanRegex);
