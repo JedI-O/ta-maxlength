@@ -17,9 +17,8 @@ angular
         var parseContent = function(content, returnValue) {
           //rangy span
           var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
-          var rangySpanWithParagraphRegex = /<p><span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span><\/p>/;
           var rangySpan = content.match(rangySpanRegex);
-          var rangySpanWithParagraph = content.match(rangySpanWithParagraphRegex);
+          console.info('rangySpan:', rangySpan);
 
           //remove zero-width no break spaces
           content = content.replace(new RegExp('&#65279;', 'g'), '');
@@ -27,9 +26,7 @@ angular
           //remove empty paragraphs if existing at the beginning
           if(content.indexOf('<p></p>') == 0) {
             content = content.substr(7);
-          }/* else if(rangySpanWithParagraph != null && rangySpanWithParagraph.index == 0) {
-            content = content.replace(rangySpanWithParagraph[0], '');
-          }*/
+          }
 
           //build dom stack
           var domStack = [];
