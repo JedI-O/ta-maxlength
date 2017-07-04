@@ -18,7 +18,7 @@ angular
           console.info('CONTENT:', content);
 
           var tmp = document.createElement("DIV");
-          tmp.innerHTML = html;
+          tmp.innerHTML = content;
           console.info('LENGTH:', tmp.textContent || tmp.innerText || "");
 
           //rangy span
