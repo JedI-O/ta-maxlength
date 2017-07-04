@@ -15,12 +15,14 @@ angular
         }
 
         var parseContent = function(content, returnValue) {
+          console.info('CONTENT:', content);
+
           //rangy span
           var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
           var rangySpan = content.match(rangySpanRegex);
-          if(rangySpan && rangySpan[0]) {
+          /*if(rangySpan && rangySpan[0]) {
             console.info('found rangy span:', rangySpan[0]);
-          }
+          }*/
 
           //remove zero-width no break spaces
           content = content.replace(new RegExp('&#65279;', 'g'), '');
@@ -61,13 +63,6 @@ angular
                   if(printedChars == maxLength) {
                     //close remaining tags and stop
                     domStack = domStack.reverse();
-
-                    //add the rangy span
-                    if(rangySpan != null && rangySpan.length>0) {
-                      console.info('add rangy span:', rangySpan[0]);
-                      strippedText += rangySpan[0];
-                    }
-
                     for(var domStackIndex=0; domStackIndex<domStack.length; domStackIndex++) {
                       var tag = domStack[domStackIndex];
                       strippedText += '</' + tag + '>';
