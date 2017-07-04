@@ -15,12 +15,6 @@ angular
         }
 
         var parseContent = function(content, returnValue) {
-          console.info('CONTENT:', content);
-
-          var tmp = document.createElement("DIV");
-          tmp.innerHTML = content;
-          console.info('LENGTH:', tmp.textContent || tmp.innerText || "");
-
           //rangy span
           var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
           var rangySpan = content.match(rangySpanRegex);
@@ -75,7 +69,7 @@ angular
 
                     switch(returnValue) {
                       case 'strippedText':
-                        console.info('strippedText:', strippedText);
+                        //console.info('strippedText:', strippedText);
                         return strippedText;
                       case 'charCount':
                         return printedChars;
@@ -117,7 +111,7 @@ angular
 
           switch(returnValue) {
             case 'strippedText':
-              console.info('strippedText:', strippedText);
+              //console.info('strippedText:', strippedText);
               return strippedText;
             case 'charCount':
               return printedChars;
@@ -192,8 +186,17 @@ angular
 
           return editorInstance === undefined ? '' : editor.scope.html;
         }, function() {
-          editor.scope.html = stripContent(editor.scope.html);
-          updateRemainingChars();
+          var content = editor.scope.html;
+
+          //check if text is too long
+          var tmp = document.createElement('DIV');
+          tmp.innerHTML = content;
+          var contentLength = (tmp.textContent || tmp.innerText || '').length;
+          if(contentLength > maxLength) {
+            //strip HTML content
+            editor.scope.html = stripContent(content);
+            updateRemainingChars();
+          }
         });
       }
     };
