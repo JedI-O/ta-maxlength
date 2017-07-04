@@ -15,6 +15,8 @@ angular
         }
 
         var parseContent = function(content, returnValue) {
+          console.info('Parsing this great content');
+
           //rangy span
           var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
           var rangySpanWithParagraphRegex = /<p><span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span><\/p>/;
