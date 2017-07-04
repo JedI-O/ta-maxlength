@@ -18,7 +18,6 @@ angular
           //rangy span
           var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
           var rangySpan = content.match(rangySpanRegex);
-          console.info('rangySpan:', rangySpan);
 
           //remove zero-width no break spaces
           content = content.replace(new RegExp('&#65279;', 'g'), '');
@@ -59,14 +58,13 @@ angular
                   if(printedChars == maxLength) {
                     //close remaining tags and stop
                     domStack = domStack.reverse();
-                    for(var domStackIndex=0; domStackIndex<domStack.length; domStackIndex++) {
-                      if(domStackIndex==domStack.length-1) {
-                        //add the rangy span
-                        /*if(rangySpan != null && rangySpan.length>0) {
-                          strippedText += rangySpan[0];
-                        }*/
-                      }
 
+                    //add the rangy span
+                    if(rangySpan != null && rangySpan.length>0) {
+                      strippedText += rangySpan[0];
+                    }
+
+                    for(var domStackIndex=0; domStackIndex<domStack.length; domStackIndex++) {
                       var tag = domStack[domStackIndex];
                       strippedText += '</' + tag + '>';
                     }
