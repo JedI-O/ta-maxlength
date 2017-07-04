@@ -15,8 +15,6 @@ angular
         }
 
         var parseContent = function(content, returnValue) {
-          console.info('Parsing this great content');
-
           //rangy span
           var rangySpanRegex = /<span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span>/;
           var rangySpanWithParagraphRegex = /<p><span id="selectionBoundary_[0-9]+_[0-9]+" class="rangySelectionBoundary"><\/span><\/p>/;
@@ -67,9 +65,9 @@ angular
                     for(var domStackIndex=0; domStackIndex<domStack.length; domStackIndex++) {
                       if(domStackIndex==domStack.length-1) {
                         //add the rangy span
-                        if(rangySpan != null && rangySpan.length>0) {
+                        /*if(rangySpan != null && rangySpan.length>0) {
                           strippedText += rangySpan[0];
-                        }
+                        }*/
                       }
 
                       var tag = domStack[domStackIndex];
