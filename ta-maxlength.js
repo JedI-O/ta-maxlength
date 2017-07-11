@@ -179,16 +179,14 @@ angular
             });
           }
 
-          if(editor.scope.html.trim() === '') {
-            console.info('editor scope html is empty, should return');
-          }
-
-          if(editorInstance === undefined) {
+          if(editorInstance === undefined || editor.scope.html.trim() === '') {
             return '';
           } else {
             return editor.scope.html;
           }
         }, function() {
+          console.info('WATCHING');
+
           var content = editor.scope.html;
 
           //check if text is too long
