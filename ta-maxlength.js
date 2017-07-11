@@ -170,7 +170,7 @@ angular
           updateRemainingChars();
         }
 
-        $scope.$watch(function() {
+        /*$scope.$watch(function() {
           var currentTime = new Date();
 
           var editorInstance = textAngularManager.retrieveEditor(attrs.name);
@@ -248,7 +248,7 @@ angular
             editor.scope.html = stripContent(content);
           }
           updateRemainingChars();
-        });
+        });*/
       }
     };
   });
