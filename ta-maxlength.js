@@ -189,6 +189,7 @@ angular
                   $scope.historyForm.$setPristine();
                 }
                 $scope.deferred.resolve(true);
+                $scope.unregisterYesNoCancel();
                 break;
               case 'setUntouched':
                 $scope.historyForm.$setPristine();
@@ -198,9 +199,9 @@ angular
                     input.$setUntouched();
                   }
                 });
+                $scope.unregisterYesNoCancel();
             }
 
-            $scope.$digest();
             delete $scope.taMaxLengthExecute;
           }
 
