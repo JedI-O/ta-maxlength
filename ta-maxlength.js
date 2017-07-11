@@ -204,11 +204,11 @@ angular
             return '';
           }
 
-          return (editorInstance === undefined || editor.scope.html.trim() == '') ? '' : editor.scope.html;
+          return (editorInstance === undefined || editor.scope.html == '') ? '' : editor.scope.html;
         }, function() {
           var content = editor.scope.html;
 
-          if(content.trim() == '') {
+          if(content == '') {
             console.warn('I should not be here now...');
           }
 
