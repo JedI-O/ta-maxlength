@@ -179,15 +179,13 @@ angular
             });
           }
 
-          return editorInstance === undefined ? '' : editor.scope.html;
+          if(editorInstance === undefined || editor.scope.html.trim() === '') {
+            return '';
+          } else {
+            return editor.scope.html;
+          }
         }, function() {
           var content = editor.scope.html;
-
-          //avoid form "dirtification"
-          if(content.trim() === '') {
-            console.info('That should return without update');
-            return;
-          }
 
           //check if text is too long
           var tmp = document.createElement('DIV');
