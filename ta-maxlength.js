@@ -9,34 +9,6 @@ angular
         var editor, editorID, editorContainer, maxLength = parseInt(attrs.taMaxlength);
         var initDone = false;
 
-        var editorInstance = textAngularManager.retrieveEditor(attrs.name);
-
-        if((editorInstance !== undefined) && (editor === undefined)) {
-          editor = editorInstance;
-
-          if(!initDone) {
-            //create DIV
-            editorID = editor.scope.displayElements.text[0].id.substr(13);
-            editorContainer = angular.element(document.querySelector('#taTextElement'+editorID));
-            editorContainer.parent().append('<div id="taInnerCharCount'+editorID+'" class="taInnerCharCount"></div>');
-            initDone = true;
-            updateRemainingChars();
-          }
-
-          getEditor().addEventListener('keydown', function(e) {
-            if(!isNavigationKey(e.keyCode) && !isCopying(e) && (getContentLength(editor.scope.html) >= maxLength)) {
-              e.preventDefault();
-
-              stripContent();
-              return false;
-            }
-          });
-
-          getEditor().addEventListener('click', function() {
-            updateRemainingChars();
-          });
-        }
-
         if(isNaN(maxLength)) {
           console.warn('Invalid number for ta-maxlength, automatically set to POSITIVE_INFINITY');
           maxLength = Number.POSITIVE_INFINITY;
@@ -180,7 +152,7 @@ angular
           return event.ctrlKey && ([65, 67, 88].indexOf(event.keyCode) !== -1);
         };
 
-        function checkText() {
+        function stripContent() {
           var content = editor.scope.html;
 
           if(content == '') {
@@ -198,7 +170,9 @@ angular
           updateRemainingChars();
         }
 
-        /*$scope.$watch(function() {
+        $scope.$watch(function() {
+          var currentTime = new Date();
+
           var editorInstance = textAngularManager.retrieveEditor(attrs.name);
 
           if((editorInstance !== undefined) && (editor === undefined)) {
@@ -236,7 +210,7 @@ angular
                 $scope.unregisterYesNoCancel();
                 break;
               case 'setUntouched':
-                $scope.historyForm.$setPristine();
+                /*$scope.historyForm.$setPristine();
                 $scope.historyForm.$setUntouched();
                 angular.forEach($scope.historyForm, function (input) {
                   if (input && input.hasOwnProperty('$viewValue')) {
@@ -248,7 +222,7 @@ angular
                 //clear form errors if they exist from previous edits
                 if($scope.formInvalid) { $scope.formInvalid = false; }
                 if($scope.fieldsWithError) { $scope.fieldsWithError = []; }
-                if($scope.historyForm.$dirty) { $scope.historyForm.$setPristine();}
+                if($scope.historyForm.$dirty) { $scope.historyForm.$setPristine();}*/
             }
           }
 
@@ -274,7 +248,7 @@ angular
             editor.scope.html = stripContent(content);
           }
           updateRemainingChars();
-        });*/
+        });
       }
     };
   });
