@@ -183,9 +183,7 @@ angular
           if($scope.taMaxLengthExecute) {
             switch($scope.taMaxLengthExecute) {
               case 'setPristine':
-                if($scope.historyForm) {
-                  $scope.historyForm.$setPristine();
-                }
+                $scope.historyForm.$setPristine();
                 $scope.deferred.resolve(true);
                 $scope.unregisterYesNoCancel();
                 break;
@@ -211,7 +209,7 @@ angular
           var content = editor.scope.html;
 
           if(content == '') {
-            console.warn('I should not be here now...');
+            return;
           }
 
           //check if text is too long
