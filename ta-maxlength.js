@@ -210,19 +210,15 @@ angular
                 $scope.unregisterYesNoCancel();
                 break;
               case 'setUntouched':
-                /*$scope.historyForm.$setPristine();
+                $scope.historyForm.$setPristine();
                 $scope.historyForm.$setUntouched();
                 angular.forEach($scope.historyForm, function (input) {
                   if (input && input.hasOwnProperty('$viewValue')) {
                     input.$setUntouched();
                   }
                 });
+                $scope.deferred.resolve(true);
                 $scope.unregisterYesNoCancel();
-
-                //clear form errors if they exist from previous edits
-                if($scope.formInvalid) { $scope.formInvalid = false; }
-                if($scope.fieldsWithError) { $scope.fieldsWithError = []; }
-                if($scope.historyForm.$dirty) { $scope.historyForm.$setPristine();}*/
             }
           }
 
