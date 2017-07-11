@@ -153,6 +153,8 @@ angular
         };
 
         $scope.$watch(function() {
+          var currentTime = new Date();
+
           var editorInstance = textAngularManager.retrieveEditor(attrs.name);
 
           if((editorInstance !== undefined) && (editor === undefined)) {
@@ -188,7 +190,7 @@ angular
                 $scope.unregisterYesNoCancel();
                 break;
               case 'setUntouched':
-                console.info('handling setUntouched by taMaxLength');
+                console.info('handling setUntouched by taMaxLength at', currentTime.getMilliseconds());
 
                 $scope.historyForm.$setPristine();
                 $scope.historyForm.$setUntouched();
@@ -207,6 +209,8 @@ angular
           }
 
           if(editor.scope.html == '') {
+            console.info('returning empty at', currentTime.getMilliseconds());
+
             delete $scope.taMaxLengthExecute;
             return '';
           }
@@ -214,6 +218,8 @@ angular
           return (editorInstance === undefined) ? '' : editor.scope.html;
         }, function() {
           var content = editor.scope.html;
+
+          console.info('updating html content at', currentTime.getMilliseconds());
 
           if(content == '') {
             return;
