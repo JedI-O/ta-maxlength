@@ -179,17 +179,29 @@ angular
             });
           }
 
-          if(editorInstance === undefined) {
-            return '';
-          } else if(editor.scope.html.trim() === '' && $scope.deferred) {
-            if ($scope.historyForm) {
-              $scope.historyForm.$setPristine();
+          //execute frontend tasks
+          if($scope.taMaxLengthExecute) {
+            switch($scope.taMaxLengthExecute) {
+              case 'setPristine':
+                if($scope.historyForm) {
+                  $scope.historyForm.$setPristine();
+                }
+                $scope.deferred.resolve(true);
+                break;
+              case 'setUntouched':
+                if ($scope.historyForm) { $scope.historyForm.$setPristine(); }
+                $scope.historyForm.$setUntouched();
+                angular.forEach($scope.historyForm, function (input) {
+                  if (input && input.hasOwnProperty('$viewValue')) {
+                    input.$setUntouched();
+                  }
+                });
             }
-            $scope.deferred.resolve(true);
-            return '';
-          } else {
-            return editor.scope.html;
+
+            delete $scope.taMaxLengthExecute;
           }
+
+          return (editorInstance === undefined) ? '' : editor.scope.html;
         }, function() {
           var content = editor.scope.html;
 
