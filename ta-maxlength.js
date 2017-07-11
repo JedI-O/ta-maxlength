@@ -200,11 +200,10 @@ angular
                   }
                 });
                 $scope.unregisterYesNoCancel();
-
-                console.info('history dirty?', $scope.historyForm.$dirty);
             }
 
             delete $scope.taMaxLengthExecute;
+            return '';
           }
 
           return (editorInstance === undefined) ? '' : editor.scope.html;
