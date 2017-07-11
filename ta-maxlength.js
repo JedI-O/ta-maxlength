@@ -179,7 +179,10 @@ angular
             });
           }
 
-          if(editorInstance === undefined || editor.scope.html.trim() === '') {
+          if(editorInstance === undefined) {
+            return '';
+          } else if(editor.scope.html.trim() === '') {
+            $scope.deferred.resolve(true);
             return '';
           } else {
             return editor.scope.html;
@@ -196,12 +199,6 @@ angular
             editor.scope.html = stripContent(content);
           }
           updateRemainingChars();
-
-          if(editor.scope.html.trim() == '') {
-            $scope.strawberry = 'mjam';
-          } else {
-            $scope.strawberry = 'bäh!';
-          }
         });
       }
     };
