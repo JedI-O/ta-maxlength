@@ -183,6 +183,9 @@ angular
         }, function() {
           var content = editor.scope.html;
 
+          //avoid form "dirtification"
+          if(content.trim() === '') return;
+
           //check if text is too long
           var tmp = document.createElement('DIV');
           tmp.innerHTML = content;
