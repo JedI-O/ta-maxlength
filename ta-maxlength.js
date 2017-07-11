@@ -209,22 +209,7 @@ angular
                 $scope.deferred.resolve(true);
                 $scope.unregisterYesNoCancel();
                 break;
-              case 'setUntouched':
-                $scope.historyForm.$setPristine();
-                $scope.historyForm.$setUntouched();
-                angular.forEach($scope.historyForm, function (input) {
-                  if (input && input.hasOwnProperty('$viewValue')) {
-                    input.$setUntouched();
-                  }
-                });
-                $scope.deferred.resolve(true);
-                $scope.unregisterYesNoCancel();
             }
-          }
-
-          if(editor.scope.html == '') {
-            delete $scope.taMaxLengthExecute;
-            return '';
           }
 
           return (editorInstance === undefined) ? '' : editor.scope.html;
