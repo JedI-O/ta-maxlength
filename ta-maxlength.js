@@ -199,6 +199,7 @@ angular
                     input.$setUntouched();
                   }
                 });
+                $scope.deferred.resolve(true);
                 $scope.unregisterYesNoCancel();
             }
 
