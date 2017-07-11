@@ -198,6 +198,11 @@ angular
                   }
                 });
                 $scope.unregisterYesNoCancel();
+
+                //clear form errors if they exist from previous edits
+                if($scope.formInvalid) { $scope.formInvalid = false; }
+                if($scope.fieldsWithError) { $scope.fieldsWithError = []; }
+                if($scope.historyForm.$dirty) { $scope.historyForm.$setPristine();}
             }
           }
 
