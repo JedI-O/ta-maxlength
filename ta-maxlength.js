@@ -181,7 +181,7 @@ angular
 
           //execute frontend tasks
           if($scope.taMaxLengthExecute) {
-            console.info('taMaxLengthExecute:', $scope.taMaxLengthExecute);
+            editor.scope.html = '';
 
             switch($scope.taMaxLengthExecute) {
               case 'setPristine':
