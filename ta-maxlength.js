@@ -152,6 +152,24 @@ angular
           return event.ctrlKey && ([65, 67, 88].indexOf(event.keyCode) !== -1);
         };
 
+        function stripContent() {
+          var content = editor.scope.html;
+
+          if(content == '') {
+            return;
+          }
+
+          //check if text is too long
+          var tmp = document.createElement('DIV');
+          tmp.innerHTML = content;
+          var contentLength = (tmp.textContent || tmp.innerText || '').length;
+          if(contentLength > maxLength) {
+            //strip HTML content
+            editor.scope.html = stripContent(content);
+          }
+          updateRemainingChars();
+        }
+
         $scope.$watch(function() {
           var currentTime = new Date();
 
@@ -172,6 +190,8 @@ angular
             getEditor().addEventListener('keydown', function(e) {
               if(!isNavigationKey(e.keyCode) && !isCopying(e) && (getContentLength(editor.scope.html) >= maxLength)) {
                 e.preventDefault();
+
+                stripContent();
                 return false;
               }
             });
@@ -190,8 +210,6 @@ angular
                 $scope.unregisterYesNoCancel();
                 break;
               case 'setUntouched':
-                console.info('handling setUntouched by taMaxLength at', currentTime.getTime());
-
                 $scope.historyForm.$setPristine();
                 $scope.historyForm.$setUntouched();
                 angular.forEach($scope.historyForm, function (input) {
@@ -211,10 +229,6 @@ angular
           if(editor.scope.html == '') {
             delete $scope.taMaxLengthExecute;
             return '';
-          }
-
-          if(editorInstance !== undefined) {
-            console.info('executing watcher at', currentTime.getTime());
           }
 
           return (editorInstance === undefined) ? '' : editor.scope.html;
