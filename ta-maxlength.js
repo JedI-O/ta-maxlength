@@ -208,7 +208,9 @@ angular
         }, function() {
           var content = editor.scope.html;
 
-          console.info('content:', content);
+          if(content.trim() == '') {
+            console.warn('I should not be here now...');
+          }
 
           //check if text is too long
           var tmp = document.createElement('DIV');
