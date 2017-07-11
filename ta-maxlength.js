@@ -179,7 +179,11 @@ angular
             });
           }
 
-          if(editorInstance === undefined || editor.scope.html.trim() === '') {
+          if(editor.scope.html.trim() === '') {
+            console.info('editor scope html is empty, should return');
+          }
+
+          if(editorInstance === undefined) {
             return '';
           } else {
             return editor.scope.html;
