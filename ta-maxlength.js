@@ -182,6 +182,7 @@ angular
           if(editorInstance === undefined) {
             return '';
           } else if(editor.scope.html.trim() === '' && $scope.deferred) {
+            console.info('$scope.deferred:', $scope.deferred);
             $scope.deferred.resolve(true);
             return '';
           } else {
