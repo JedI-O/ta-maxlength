@@ -190,7 +190,7 @@ angular
                 $scope.unregisterYesNoCancel();
                 break;
               case 'setUntouched':
-                console.info('handling setUntouched by taMaxLength at', currentTime.getMilliseconds());
+                console.info('handling setUntouched by taMaxLength at', currentTime.getTime());
 
                 $scope.historyForm.$setPristine();
                 $scope.historyForm.$setUntouched();
@@ -213,13 +213,13 @@ angular
             return '';
           }
 
+          if(editorInstance !== undefined) {
+            console.info('executing watcher at', currentTime.getTime());
+          }
+
           return (editorInstance === undefined) ? '' : editor.scope.html;
         }, function() {
-          var currentTime = new Date();
-
           var content = editor.scope.html;
-
-          console.info('updating html content at', currentTime.getMilliseconds());
 
           if(content == '') {
             return;
