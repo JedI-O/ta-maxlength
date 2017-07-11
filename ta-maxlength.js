@@ -199,7 +199,6 @@ angular
                     input.$setUntouched();
                   }
                 });
-                $scope.deferred.resolve(true);
                 $scope.unregisterYesNoCancel();
             }
 
@@ -210,6 +209,8 @@ angular
           return (editorInstance === undefined) ? '' : editor.scope.html;
         }, function() {
           var content = editor.scope.html;
+
+          console.info('content:', content);
 
           //check if text is too long
           var tmp = document.createElement('DIV');
