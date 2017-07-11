@@ -181,6 +181,8 @@ angular
 
           //execute frontend tasks
           if($scope.taMaxLengthExecute) {
+            console.info('taMaxLengthExecute:', $scope.taMaxLengthExecute);
+
             switch($scope.taMaxLengthExecute) {
               case 'setPristine':
                 if($scope.historyForm) {
@@ -189,7 +191,7 @@ angular
                 $scope.deferred.resolve(true);
                 break;
               case 'setUntouched':
-                if ($scope.historyForm) { $scope.historyForm.$setPristine(); }
+                $scope.historyForm.$setPristine();
                 $scope.historyForm.$setUntouched();
                 angular.forEach($scope.historyForm, function (input) {
                   if (input && input.hasOwnProperty('$viewValue')) {
