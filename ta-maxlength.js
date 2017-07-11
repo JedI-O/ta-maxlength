@@ -9,6 +9,34 @@ angular
         var editor, editorID, editorContainer, maxLength = parseInt(attrs.taMaxlength);
         var initDone = false;
 
+        var editorInstance = textAngularManager.retrieveEditor(attrs.name);
+
+        if((editorInstance !== undefined) && (editor === undefined)) {
+          editor = editorInstance;
+
+          if(!initDone) {
+            //create DIV
+            editorID = editor.scope.displayElements.text[0].id.substr(13);
+            editorContainer = angular.element(document.querySelector('#taTextElement'+editorID));
+            editorContainer.parent().append('<div id="taInnerCharCount'+editorID+'" class="taInnerCharCount"></div>');
+            initDone = true;
+            updateRemainingChars();
+          }
+
+          getEditor().addEventListener('keydown', function(e) {
+            if(!isNavigationKey(e.keyCode) && !isCopying(e) && (getContentLength(editor.scope.html) >= maxLength)) {
+              e.preventDefault();
+
+              stripContent();
+              return false;
+            }
+          });
+
+          getEditor().addEventListener('click', function() {
+            updateRemainingChars();
+          });
+        }
+
         if(isNaN(maxLength)) {
           console.warn('Invalid number for ta-maxlength, automatically set to POSITIVE_INFINITY');
           maxLength = Number.POSITIVE_INFINITY;
@@ -152,7 +180,7 @@ angular
           return event.ctrlKey && ([65, 67, 88].indexOf(event.keyCode) !== -1);
         };
 
-        function stripContent() {
+        function checkText() {
           var content = editor.scope.html;
 
           if(content == '') {
@@ -171,8 +199,6 @@ angular
         }
 
         /*$scope.$watch(function() {
-          var currentTime = new Date();
-
           var editorInstance = textAngularManager.retrieveEditor(attrs.name);
 
           if((editorInstance !== undefined) && (editor === undefined)) {
