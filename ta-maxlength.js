@@ -181,8 +181,6 @@ angular
 
           //execute frontend tasks
           if($scope.taMaxLengthExecute) {
-            editor.scope.html = '';
-
             switch($scope.taMaxLengthExecute) {
               case 'setPristine':
                 if($scope.historyForm) {
@@ -206,7 +204,7 @@ angular
             return '';
           }
 
-          return (editorInstance === undefined) ? '' : editor.scope.html;
+          return (editorInstance === undefined || editor.scope.html.trim() == '') ? '' : editor.scope.html;
         }, function() {
           var content = editor.scope.html;
 
