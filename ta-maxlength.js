@@ -188,6 +188,8 @@ angular
                 $scope.unregisterYesNoCancel();
                 break;
               case 'setUntouched':
+                console.info('handling setUntouched by taMaxLength');
+
                 $scope.historyForm.$setPristine();
                 $scope.historyForm.$setUntouched();
                 angular.forEach($scope.historyForm, function (input) {
