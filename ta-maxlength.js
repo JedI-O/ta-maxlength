@@ -183,10 +183,11 @@ angular
         }, function() {
           var content = editor.scope.html;
 
-          console.info('[ta-maxlength] content:', content);
-
           //avoid form "dirtification"
-          if(content.trim() === '') return;
+          if(content.trim() === '') {
+            console.info('That should return without update');
+            return;
+          }
 
           //check if text is too long
           var tmp = document.createElement('DIV');
