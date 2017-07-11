@@ -209,14 +209,14 @@ angular
           }
 
           if(editor.scope.html == '') {
-            console.info('returning empty at', currentTime.getMilliseconds());
-
             delete $scope.taMaxLengthExecute;
             return '';
           }
 
           return (editorInstance === undefined) ? '' : editor.scope.html;
         }, function() {
+          var currentTime = new Date();
+
           var content = editor.scope.html;
 
           console.info('updating html content at', currentTime.getMilliseconds());
