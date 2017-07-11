@@ -200,6 +200,7 @@ angular
                 });
             }
 
+            $scope.$digest();
             delete $scope.taMaxLengthExecute;
           }
 
