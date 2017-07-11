@@ -183,6 +183,8 @@ angular
         }, function() {
           var content = editor.scope.html;
 
+          console.info('[ta-maxlength] content:', content);
+
           //avoid form "dirtification"
           if(content.trim() === '') return;
 
