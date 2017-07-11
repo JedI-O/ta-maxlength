@@ -199,20 +199,14 @@ angular
                 });
                 $scope.unregisterYesNoCancel();
             }
+          }
 
+          if(editor.scope.html == '') {
             delete $scope.taMaxLengthExecute;
             return '';
           }
 
-          if(editorInstance === undefined) {
-            console.info('editorInstance is undefined');
-          } else if(editor.scope.html == '') {
-            console.info('HTML is empty');
-          } else {
-            console.warn('calling watcher function with', editor.scope.html);
-          }
-
-          return (editorInstance === undefined || editor.scope.html == '') ? '' : editor.scope.html;
+          return (editorInstance === undefined) ? '' : editor.scope.html;
         }, function() {
           var content = editor.scope.html;
 
