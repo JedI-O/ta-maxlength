@@ -182,12 +182,9 @@ angular
           if(editorInstance === undefined || editor.scope.html.trim() === '') {
             return '';
           } else {
-            console.info('Fire watcher with', editor.scope.html);
             return editor.scope.html;
           }
         }, function() {
-          console.info('WATCHING');
-
           var content = editor.scope.html;
 
           //check if text is too long
@@ -199,6 +196,12 @@ angular
             editor.scope.html = stripContent(content);
           }
           updateRemainingChars();
+
+          if(editor.scope.html.trim() == '') {
+            $scope.strawberry = 'mjam';
+          } else {
+            $scope.strawberry = 'bäh!';
+          }
         });
       }
     };
